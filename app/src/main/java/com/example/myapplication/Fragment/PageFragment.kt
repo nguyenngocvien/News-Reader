@@ -11,11 +11,8 @@ import android.util.Log
 import android.view.View
 import com.example.myapplication.Adapter.NewpaperAdapter
 import com.example.myapplication.Interface.NewpaperItemClickListener
-import com.example.myapplication.Data.FakeService
 import com.example.myapplication.Model.Newpaper
-import com.example.myapplication.Model.Result
 import com.example.myapplication.R
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_page.*
 import org.jsoup.Jsoup
 import java.io.BufferedReader
@@ -63,12 +60,14 @@ class PageFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        getData().execute("https://baomoi.com/")
+
+        //get data from web
+        GetData().execute("https://tuoitre.vn/")
     }
 
-    inner class getData : AsyncTask<String, Void, String>() {
+    inner class GetData : AsyncTask<String, Void, String>() {
 
-        override fun doInBackground(vararg params: String?) : String {
+        override fun doInBackground(vararg params: String?): String {
             var content: StringBuilder = StringBuilder()
             val url: URL = URL(params[0])
             val urlConnection: HttpURLConnection = url.openConnection() as HttpURLConnection
@@ -76,55 +75,37 @@ class PageFragment : Fragment() {
             val inputStreamReader: InputStreamReader = InputStreamReader(inputStream)
             val bufferedReader: BufferedReader = BufferedReader(inputStreamReader)
 
-            var line:String = ""
+            var line: String? = ""
             try {
                 do {
                     line = bufferedReader.readLine()
-                    if(line != null){
+                    if (line != null) {
                         content.append(line)
                     }
-                }while (line != null)
+                } while (line != null)
                 bufferedReader.close()
-            } catch (e: Exception){
+            } catch (e: Exception) {
                 Log.d("AAA", e.toString())
             }
             return content.toString() // tra ve noi dung web
         }
 
-        // tien hanh boc tach noi dung web sau do dua vao recycleview
-        override fun onPostExecute(result: String?) {
+        override fun onPostExecute(result: String) {
             super.onPostExecute(result)
             val doc = Jsoup.parse(result)
-            doc.select("div[class=story]")
+            doc.select("li[class=news-item]")
                 .forEach { element ->
-                    val title = element.select("h4[class=story__heading]").select("a").text()
-                    val linkImage = element.select("img").attr("src")
-                    val linkNews = element.select("h4[class=story__heading]").attr("href")
-                    val additionalInfo = element.select("a[class=source]").text()
-
-                    newpapers.add(Newpaper(title, linkImage, linkNews, additionalInfo)) //add thong tin vao danh sach news
+                    val title = element.select("h3[class=title-news]").select("a").text()
+                    val linkImage = element.select("a").select("img").attr("src")
+                    val linkNews = element.select("a").attr("href")
+                    val overview = element.select("p").text()
+                    newpapers.add(Newpaper(title, linkImage, linkNews, overview)) //add thong tin vao danh sach news
                 }
-
             setUpRecycleView() // show news
         }
     }
 
     private fun setUpRecycleView(){
-        /*newpapers = when (mPage) {
-            0-> { val json = FakeService.getNewspaperSecondRaw()
-                val result = Gson().fromJson(json, Result::class.java)
-                result.results
-            }
-            1-> { val json = FakeService.getNewspaperFirstRaw()
-                val result = Gson().fromJson(json, Result::class.java)
-                result.results
-            }
-            else -> {
-                val json = FakeService.getNewspaperSecondRaw()
-                val result = Gson().fromJson(json, Result::class.java)
-                result.results
-            }
-        }*/
 
         rvNewspaper.layoutManager = LinearLayoutManager(context as Context)
         newspaperAdapter = NewpaperAdapter(newpapers, context as Context)
