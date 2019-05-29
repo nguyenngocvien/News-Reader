@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="?attr/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="75dp">
+    <Button
+            android:layout_marginRight="10dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="5dp"
+            android:id="@+id/btn_Next"
+            android:layout_width="45dp"
+            android:layout_height="40dp" android:background="@android:drawable/ic_media_next"/>
+    <ImageButton
+            android:layout_marginRight="70dp"
+            android:layout_alignRight="@+id/btn_Next"
+            android:layout_marginTop="5dp"
+            android:id="@+id/btn_Play"
+            android:layout_width="45dp"
+            android:layout_height="40dp"/>
+    <Button
+            android:layout_marginRight="70dp"
+            android:layout_alignRight="@+id/btn_Play"
+            android:layout_marginTop="5dp"
+            android:id="@+id/btn_Prev"
+            android:layout_width="45dp"
+            android:layout_height="40dp" android:background="@android:drawable/ic_media_previous"/>
+    <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@+id/btn_Prev"
+            android:id="@+id/tv_Name"
+            android:layout_marginTop="10dp"
+            android:text="Chưa chọn bài nào"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp" android:textColor="@android:color/white" android:textSize="18sp"/>
+    <TextView
+            android:id="@+id/tv_TimeBegin"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/tv_Name"
+            android:text="00:00"
+            android:layout_alignLeft="@+id/tv_Name"
+            android:layout_width="50dp"
+            android:layout_height="30dp" android:textColor="@android:color/white" android:textSize="18sp"/>
+    <SeekBar
+            android:id="@+id/seek_bar"
+            android:layout_marginTop="12dp"
+            android:layout_marginRight="5dp"
+            android:layout_below="@id/tv_Name"
+            android:layout_toRightOf="@+id/tv_TimeBegin"
+            android:layout_toLeftOf="@+id/tv_TimeEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"/>
+
+    <TextView
+            android:id="@+id/tv_TimeEnd"
+            android:layout_marginTop="5dp"
+            android:layout_below="@+id/tv_Name"
+            android:text="02:03"
+            android:layout_alignParentRight="true"
+            android:layout_width="50dp"
+            android:layout_height="30dp" android:textColor="@android:color/white" android:textSize="18sp"/>
+
+</RelativeLayout>

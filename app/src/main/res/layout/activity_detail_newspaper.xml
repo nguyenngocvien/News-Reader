@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Activity.DetailNewspaperActivity">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <TextView
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:text="HellBoy"
+            android:id="@id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="22sp" android:textStyle="bold"/>
+        <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+            <TextView
+                    android:padding="8dp"
+                    android:text="iPhone chất lượng tốt với giá dao động trong khoảng 150-300 nghìn đồng. Cần lưu ý rằng đây là giá thay pin cho khách lẻ, đã bao gồm lãi và công thay - còn thực tế, mức giá cửa hàng nhập pin theo số lượng lớn rẻ hơn rất nhiều."
+                    android:id="@+id/tvContent"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"/>
+        </ScrollView>
+
+        <include layout="@layout/play_newspaper_layout"
+                 android:layout_width="match_parent"
+                 android:layout_height="75dp"/>
+
+    </LinearLayout>
+
+
+
+</android.support.constraint.ConstraintLayout>
